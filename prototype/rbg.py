@@ -21,7 +21,7 @@ for i in range(length):
 	pricePerSqFt.append(price[i]/size[i])
 	tenure.append(random.randint(0,1))
 	location.append((random.uniform(1.26828, 1.46828),random.uniform(104.6444, 104.024719)))
-	type.append(random.randint(0,8))
+	property_type.append(random.randint(0,8))
 	amenities.append(random.randint(0,7))
 	
 # To map the randomize number with the property type and tenure type
@@ -31,7 +31,7 @@ tenureType = [99, 'Free Hold']
 propertyType = ['Executive Condo', '3 Room Flat', '4 Room Flat', '5 Room Flat', 'Bungalow', 'Shophouse', 'Terrace','Private Condo', 'Mansion']
 for i in range(length):
 	tenure2.append(tenureType[tenure[i]])
-	type2.append(propertyType[type[i]])
+	type2.append(propertyType[property_type[i]])
 
 # To map the randomize number to the amenities
 amenities2 = [None] * length
