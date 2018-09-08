@@ -18,7 +18,7 @@ class Property(Base):
 	property_id = Column(Integer, primary_key=True)
 	price = Column(Integer)
 	pricePerSqFt = Column(Float)
-	tenure = Column(String)
+	tenure = Column(Integer)
 	location = Column(String)
 	size = Column(Integer)
 	type = Column(String)
