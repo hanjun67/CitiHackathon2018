@@ -45,7 +45,13 @@ def request_form():
 def property_form():
 	if request.method == "POST":
 		return render_template("property_form.html")
-	
+
+		
+@app.route('/property_list', methods=['POST', 'GET'])
+def list_property():
+	if request.method == "POST":
+		return render_template("property_list.html")
+
 if __name__ == "__main__":
 	app.secret_key = os.urandom(12)
 	app.run(debug=True,host='0.0.0.0', port=5000)

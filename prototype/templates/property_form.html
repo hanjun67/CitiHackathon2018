@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="static\style.css" type="text/css">
 </head>
 
-<form action="/property_form" method="POST">
+<form action="/property_list" method="POST">
 	<div class="homepage">
 		<div class="homepage-screen">
 			<div class="app-title">
@@ -12,6 +12,11 @@
 			</div>
 			
 			<div class="homepage-form">
+			
+				<div class="app-title">
+					<h3> Property Preferences </h3>
+				</div>
+				
 				<div class="control-group">
 					<label class="label-title" for="propertyLocation"> Location </label> <br>
 					<input type="text" class="homepage-field" value="" placeholder="Location" name="propertyLocation">
@@ -20,41 +25,65 @@
 				
 				<div class="control-group"> 
 					<label class="label-title"> Minimum Price <label> <br>
-					<input type="range" id="minPrice" min="100000" max="5000000" onchange="updateTextInput(this.value, 'minPriceInput');">
+					<input type="range" id="minPrice" min="100000" max="5000000">
 					<br> <span id="minPriceInput"></span>
 				</div>
 				
 				<div class="control-group"> 
 					<label class="label-title"> Maximum Price <label> <br>
-					<input type="range" id="maxPrice" min="100000" max="5000000" onchange="updateTextInput(this.value, 'maxPriceInput');">
+					<input type="range" id="maxPrice" min="100000" max="5000000">
 					<br> <span id="maxPriceInput"></span>
 				</div>
 				
+				<div class="control-group"> 
+					<label class="label-title"> Minimum Sqft <label> <br>
+					<input type="range" id="minSqft" min="645" max="39000">
+					<br> <span id="minSqftInput"></span>
+				</div>
+				
+				<div class="control-group"> 
+					<label class="label-title"> Maximum Sqft <label> <br>
+					<input type="range" id="maxSqft" min="645" max="39000">
+					<br> <span id="maxSqftInput"></span>
+				</div>
+				
 				<script>
-					var sliderMin = document.getElementById("minPrice");
-					var sliderMax = document.getElementById("maxPrice")
-					var outputMin = document.getElementById("minPriceInput");
-					var outputMax = document.getElementById("maxPriceInput");
-					outputMin.innerHTML = sliderMin.value;
-					outputMax.innerHTML = sliderMax.value;
-
-					sliderMin.oninput = function() {
-						outputMin.innerHTML = this.value;
+					var sliderMinPrice = document.getElementById("minPrice");
+					var sliderMaxPrice = document.getElementById("maxPrice")
+					var outputMinPrice = document.getElementById("minPriceInput");
+					var outputMaxPrice = document.getElementById("maxPriceInput");
+					outputMinPrice.innerHTML = sliderMinPrice.value;
+					outputMaxPrice.innerHTML = sliderMaxPrice.value;
+					
+					sliderMinPrice.oninput = function() {
+						outputMinPrice.innerHTML = this.value;
 					}
 					
-					sliderMax.oninput = function() {
-						outputMax.innerHTML = this.value;
+					sliderMaxPrice.oninput = function() {
+						outputMaxPrice.innerHTML = this.value;
+					}
+					
+					var sliderMinSqft = document.getElementById("minSqft");
+					var sliderMaxSqft = document.getElementById("maxSqft")
+					var outputMinSqft = document.getElementById("minSqftInput");
+					var outputMaxSqft = document.getElementById("maxSqftInput");
+					outputMinSqft.innerHTML = sliderMinSqft.value;
+					outputMaxSqft.innerHTML = sliderMaxSqft.value;
+					
+					sliderMinSqft.oninput = function() {
+						outputMinSqft.innerHTML = this.value;
+					}
+					
+					sliderMaxSqft.oninput = function() {
+						outputMaxSqft.innerHTML = this.value;
 					}
 				</script>
-				
 				
 				
 			</div>	
 			
 			
-			<div class="app-title">
-				<h3> Available Funds </h3>
-			</div>
+			
 			
 			
 			
