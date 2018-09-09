@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<head>
+	<link rel="stylesheet" href="static\style.css" type="text/css">
+</head>
+
+<form action="/property_form" method="POST">
+	<div class="homepage">
+		<div class="homepage-screen">
+			<div class="app-title">
+				<h1> Property </h1>
+			</div>
+			
+			<div class="homepage-form">
+				<div class="control-group">
+					<label class="label-title" for="propertyLocation"> Location </label> <br>
+					<input type="text" class="homepage-field" value="" placeholder="Location" name="propertyLocation">
+					<label class="homepage-field-icon fui-lock" for="homepage-pass"></label>
+				</div>
+				
+				<div class="control-group"> 
+					<label class="label-title"> Minimum Price <label> <br>
+					<input type="range" id="minPrice" min="100000" max="5000000" onchange="updateTextInput(this.value, 'minPriceInput');">
+					<br> <span id="minPriceInput"></span>
+				</div>
+				
+				<div class="control-group"> 
+					<label class="label-title"> Maximum Price <label> <br>
+					<input type="range" id="maxPrice" min="100000" max="5000000" onchange="updateTextInput(this.value, 'maxPriceInput');">
+					<br> <span id="maxPriceInput"></span>
+				</div>
+				
+				<script>
+					var sliderMin = document.getElementById("minPrice");
+					var sliderMax = document.getElementById("maxPrice")
+					var outputMin = document.getElementById("minPriceInput");
+					var outputMax = document.getElementById("maxPriceInput");
+					outputMin.innerHTML = sliderMin.value;
+					outputMax.innerHTML = sliderMax.value;
+
+					sliderMin.oninput = function() {
+						outputMin.innerHTML = this.value;
+					}
+					
+					sliderMax.oninput = function() {
+						outputMax.innerHTML = this.value;
+					}
+				</script>
+				
+				
+				
+			</div>	
+			
+			
+			<div class="app-title">
+				<h3> Available Funds </h3>
+			</div>
+			
+			
+			
+				
+			<div class="homepage-form">
+				<input type="submit" value="Submit" class="btn btn-primary btn-large btn-block" >
+				
+			</div>
+		</div>
+	</div>
+</form>
+
+

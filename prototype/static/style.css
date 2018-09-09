@@ -1,0 +1,128 @@
+* {
+	box-sizing: border-box;
+}
+ 
+*:focus {
+	outline: none;
+}
+
+body {
+	font-family: Arial;
+	background-color: #3498DB;
+	padding: 100px;
+}
+
+.homepage {
+	margin: 20px auto;
+	width: 80%;
+}
+
+.homepage-screen {
+	background-color: #FFF;
+	padding: 20px;
+	border-radius: 50px
+}
+
+.label-title {
+	text-align: center;
+	font-size: 14px;
+}
+
+.app-title {
+	text-align: center;
+	color: #777; /*grey colour*/
+}
+ 
+.homepage-form {
+	text-align: center;
+}
+
+.control-group {
+	margin-bottom: 10px;
+}
+ 
+input[type="number"] {
+	text-align: center;
+	background-color: #ECF0F1; /* light grey */
+	border: 2px solid transparent;
+	border-radius: 3px;
+	font-size: 16px;
+	font-weight: 200;
+	padding: 10px 0;
+	width: 80%;
+	transition: border .5s;
+}
+
+input[type="text"] {
+	text-align: center;
+	background-color: #ECF0F1; /* light grey */
+	border: 2px solid transparent;
+	border-radius: 3px;
+	font-size: 16px;
+	font-weight: 200;
+	padding: 10px 0;
+	width: 80%;
+	transition: border .5s;
+}
+
+ 
+ 
+input:focus {
+	border: 2px solid #3498DB; /* light blue */
+	box-shadow: none;
+}
+
+.radioClass > label{
+	font-size: 14px;
+}
+
+.radioClass > input[type="radio"] {
+	height: 8px;
+}
+
+ 
+.btn {
+	border: 2px solid transparent;
+	background: #3498DB;
+	color: #ffffff; 
+	font-size: 16px;
+	line-height: 25px;
+	padding: 10px 0;
+	text-decoration: none;
+	text-shadow: none;
+	border-radius: 3px;
+	box-shadow: none;
+	transition: 0.25s;
+	display: block;
+	width: 250px;
+	margin: 0 auto;
+}
+ 
+.btn:hover {
+	background-color: #2980B9;
+}
+ 
+.homepage-link {
+	font-size: 14px;
+	color: #444;
+	display: block;
+	margin-top: 12px;
+}
+
+.selectTag {
+	font-size: 14px;
+	text-align: center;
+	padding: 10px 0;
+	margin-bottom: 10px;
+}
+
+.content-hide{
+	display:none!important
+}
+
+.content-show{
+	display:block!important
+}
+
+
+
