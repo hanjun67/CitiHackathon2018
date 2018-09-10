@@ -7,7 +7,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 
 # Change the .db to the name that you wanted if needed.
-engine = create_engine('sqlite:///ppt.db', echo=True)
+engine = create_engine('sqlite:///property.db', echo=True)
 Base = declarative_base()
 
 ########################################################################
