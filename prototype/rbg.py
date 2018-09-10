@@ -1,7 +1,7 @@
 # This script is to generate random number of entries
 import random
 import xlsxwriter
-
+import functools
 
 # Predefined variable
 length = 100
@@ -11,7 +11,7 @@ pricePerSqFt = []
 tenure = []
 location = []
 size = []
-type = []
+property_type = []
 amenities = []
 
 # Using random to instill randomize the number
@@ -19,19 +19,29 @@ for i in range(length):
 	price.append(random.randint(100000,5000000))
 	size.append(random.randint(645, 39000))
 	pricePerSqFt.append(price[i]/size[i])
-	tenure.append(random.randint(0,1))
+	tenure.append(random.randint(*(random.choice([(1,100),(900,949),(1000,1049)]))))
 	location.append((random.uniform(1.26828, 1.46828),random.uniform(104.6444, 104.024719)))
-	property_type.append(random.randint(0,8))
+	property_type.append(random.randint(0,2))
 	amenities.append(random.randint(0,7))
 	
-# To map the randomize number with the property type and tenure type
+#To map the randomize number with the property type and tenure type
 tenure2 = []
 type2 = []
-tenureType = [99, 'Free Hold']
-propertyType = ['Executive Condo', '3 Room Flat', '4 Room Flat', '5 Room Flat', 'Bungalow', 'Shophouse', 'Terrace','Private Condo', 'Mansion']
+##tenureType = [100, 'Free Hold']
+##propertyType = ['HDB', 'Executive Condominium', 'Private Property']
 for i in range(length):
-	tenure2.append(tenureType[tenure[i]])
-	type2.append(propertyType[property_type[i]])
+        if 1000<=tenure[i]<=1049:
+                tenure2.append('Freehold')
+        elif 900<= tenure[i] <= 949:
+                tenure2.append(999)
+        else:
+                tenure2.append(tenure[i])
+        if property_type[i] == 0:
+                type2.append('HDB')
+        elif property_type[i] == 1:
+                type2.append('Executive Condominium')
+        else:
+                type2.append('Private Property')
 
 # To map the randomize number to the amenities
 amenities2 = [None] * length
