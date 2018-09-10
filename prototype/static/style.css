@@ -132,10 +132,15 @@ th {
 	color: #FFF;
 	padding: 0 2em;
 	background-color: #3498DB;
+	cursor: pointer;
 }
 
 td {
 	padding: 0 2em;
 	background-color: #e9e9e9;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
 }
 
