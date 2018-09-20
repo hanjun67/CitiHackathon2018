@@ -43,11 +43,21 @@ def request_form():
         total_fund = cpf_fund + cash
         debt = credit_card + car_loan + home_loan + other_loan
 		
-        return render_template("test.html", buyAs = buying_as, loanTenure = loan_tenure,typeHome = type_home,cash = cash, cpf_fund = cpf_fund, noHome = no_home,  grossIncome = gross_income, totalFund = total_fund, debt =debt)
+        session['noHome'] = no_home
+        session['loanTenure'] = loan_tenure
+        session['typeHome'] = type_home
+        session['cash'] = cash
+        session['cpf_fund'] = cpf_fund 
+        return render_template("property_form.html", buyAs = buying_as, loanTenure = loan_tenure,typeHome = type_home,cash = cash, cpf_fund = cpf_fund, noHome = no_home,  grossIncome = gross_income, totalFund = total_fund, debt = debt)
 
 @app.route('/property_form', methods=['POST', 'GET'])
 def property_form():
     if request.method == "POST":
+        noHome = session.get('noHome', None)
+        loanTenure = session.get('loanTenure', None)
+        typeHome = session.get('typeHome', None)
+        cash = session.get('cash', None)
+        cpf_fund = session.get('cpf_fund', None)
         q = session.query(Property).filter(Property.price < max_price(max_LTV(noHome,loanTenure,typeHome),cash,cpf_fund)).all()
         return render_template("property_form.html")
 
