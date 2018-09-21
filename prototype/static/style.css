@@ -116,11 +116,11 @@ input:focus {
 	margin-bottom: 10px;
 }
 
-.content-hide{
+.content-hide {
 	display:none!important
 }
 
-.content-show{
+.content-show {
 	display:block!important
 }
 
@@ -137,10 +137,29 @@ th {
 
 td {
 	padding: 0 2em;
+	color: #777;
 	background-color: #e9e9e9;
 }
 
 tr:nth-child(even) {
     background-color: #f2f2f2
 }
+
+.autofill_form {	
+	border: 2px solid transparent;
+	background: #6FAADE;
+	color: #ffffff; 
+	font-size: 16px;
+	line-height: 25px;
+	padding: 10px 0;
+	text-decoration: none;
+	text-shadow: none;
+	border-radius: 3px;
+	box-shadow: none;
+	transition: 0.25s;
+	display: block;
+	width: 250px;
+	margin: 0 auto;
+}
+
 

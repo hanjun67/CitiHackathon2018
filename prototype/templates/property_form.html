@@ -14,6 +14,54 @@
 			<div class="homepage-form">
 			
 				<div class="app-title">
+					<h3> Your Affordability Report </h3>
+				</div>
+				
+				<div class="control-group">
+					<div class="control-group">
+						<label class="label-title" for="maxPropertyValue">Maximum Property Value </label> <br>
+						<span name="maxPropertyValue" class="autofill_form"> {{ max_property_value}} </span>
+					</div>
+					
+					<div class="control-group">
+						<label class="label-title" for="loanAmount"> Loan Amount </label> <br>
+						<span name="loanAmount" class="autofill_form"> {{ grossIncome }} </span>
+					</div>
+					
+					<div class="control-group">
+						<label class="label-title" for="deposit"> Deposit </label> <br>
+						<span name="" class="autofill_form"> {{ grossIncome }} </span>
+					</div>
+					
+					<div class="control-group">
+						<label class="label-title" for="fees_duties"> Fees and Duties </label> <br>
+						<span name="fees_duties" class="autofill_form"> {{ grossIncome }} </span>
+					</div>
+					
+					<div class="control-group">
+						<label class="label-title" for="TDSR"> Total Debt Servicing Ratio (TDSR) </label> <br>
+						<span name="TDSR" class="autofill_form"> {{ grossIncome }} </span>
+					</div>
+					
+					<div class="control-group">
+						<label class="label-title" for="MSR"> Mortage Servicing Ratio (MSR) </label> <br>
+						<span name="MSR" class="autofill_form"> {{ grossIncome }} </span>
+					</div>
+					
+					<div class="control-group">
+						<label class="label-title" for="LTV"> Loan to Value (LTV) </label> <br>
+						<span name="LTV" class="autofill_form"> {{ grossIncome }} </span>
+					</div>
+					
+					<div class="control-group">
+						<label class="label-title" for="cashDownpayment"> Cash Downpayment </label> <br>
+						<span name="cashDownpayment" class="autofill_form"> {{ grossIncome }} </span>
+					</div>
+					
+				</div>
+				
+			
+				<div class="app-title">
 					<h3> Property Preferences </h3>
 				</div>
 				
@@ -25,25 +73,25 @@
 				
 				<div class="control-group"> 
 					<label class="label-title"> Minimum Price <label> <br>
-					<input type="range" id="minPrice" min="100000" max="5000000">
+					<input type="range" name="minPrice" id="minPrice" min="100000" max="5000000">
 					<br> <span id="minPriceInput"></span>
 				</div>
 				
 				<div class="control-group"> 
 					<label class="label-title"> Maximum Price <label> <br>
-					<input type="range" id="maxPrice" min="100000" max="5000000">
+					<input type="range" name="maxPrice" id="maxPrice" min="100000" max="5000000">
 					<br> <span id="maxPriceInput"></span>
 				</div>
 				
 				<div class="control-group"> 
 					<label class="label-title"> Minimum Sqft <label> <br>
-					<input type="range" id="minSqft" min="645" max="39000">
+					<input type="range" name="minSqft" id="minSqft" min="645" max="39000">
 					<br> <span id="minSqftInput"></span>
 				</div>
 				
 				<div class="control-group"> 
 					<label class="label-title"> Maximum Sqft <label> <br>
-					<input type="range" id="maxSqft" min="645" max="39000">
+					<input type="range" name="maxSqft" id="maxSqft" min="645" max="39000">
 					<br> <span id="maxSqftInput"></span>
 				</div>
 				

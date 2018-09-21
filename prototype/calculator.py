@@ -6,17 +6,18 @@ Created on Fri Sep  7 13:53:35 2018
 """
 
 
-def max_LTV(no_of_loans,desired_tenure,property_type):
+def max_LTV(no_of_loan, desired_tenure, property_type):
     if property_type == 'pri':
         cap = 30
     else:
         cap = 25
-    if no_of_loans == 0:
+	
+    if no_of_loan == 0:
         if desired_tenure < cap:
             return (0.75,0.05)  #(max %, min cash %)
         else:
             return (0.55,0.1)
-    elif no_of_loans == 1:
+    elif no_of_loan == 1:
         if desired_tenure < cap:
             return (0.45,0.25)
         else:
@@ -27,10 +28,11 @@ def max_LTV(no_of_loans,desired_tenure,property_type):
         else:
             return (0.15,0.25)
 
-def ABSD(status,no_of_properties):
-    if status == 'F':
+
+def ABSD(buying_status, no_of_properties):
+    if buying_status == 'F':
         return 1.2
-    elif status == 'PR':
+    elif buying_status == 'PR':
         if no_of_properties == 0:
             return 1.05
         else:
@@ -43,6 +45,7 @@ def ABSD(status,no_of_properties):
         else:
             return 1.15
 
+
 def BSD(price):
     if price <= 180000:
         return price * 1.01
@@ -53,8 +56,9 @@ def BSD(price):
     else:
         return 180000 * 1.01 + 180000 * 1.02 + 640000 * 1.03 + (price - 1000000) * 1.04
 
-def max_CPF(age,lease,price,home_type):
-    if home_type == "pri":
+
+def max_CPF(age, lease, price, property_type):
+    if property_type == "pri":
         if lease > 60:
             return price
         elif lease < 30 or (lease >= 30 and lease <= 60 and age + lease < 80):
@@ -67,8 +71,9 @@ def max_CPF(age,lease,price,home_type):
         elif lease > 60:
             return price
 
-def tdsr_msr(income,debt,home_type):
-    if home_type == "pri":
+
+def tdsr_msr(income, debt, property_type):
+    if property_type == "pri":
         return income * 0.6 - debt
     else:
         if income * 0.6 - debt > income * 0.3:
@@ -76,5 +81,7 @@ def tdsr_msr(income,debt,home_type):
         else:
             return income * 0.6 - debt
 
-def max_price(max_ltv,cpf,cash):
-    return ((cpf + cash)/(max_ltv[0] * 100) * 100)
+
+def max_price(max_ltv, cpf_fund, cash):
+    return ((cpf_fund + cash)/(max_ltv[0] * 100) * 100)
+

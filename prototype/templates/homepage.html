@@ -15,13 +15,21 @@
 			<div class="selectTag">
 				<div class="control-group">
 				<label class="label-title" for="buyAs"> Buying as: </label> <br>
-				<select name="busAs" id="buyAs" style="width:20%">
+				<select name="buyAs" id="buyAs" style="width:20%">
 					<option value="SC"> Singaporean </option>
 					<option value="PR"> Permanant Residence </option>
 					<option value="F"> Foreigner </option>
 				</select>
 				</div>
-			
+				
+				<!-- <div class="control-group"> -->
+				<!-- <label class="label-title" for="marriedStat"> Married Status </label> <br> -->
+				<!-- <select name="marriedStat" id="marriedStat" style="width:20%"> -->
+					<!-- <option value="single"> Single </option> -->
+					<!-- <option value="Married"> Married </option> -->
+				<!-- </select> -->
+				<!-- </div> -->
+				
 				<div class="control-group">
 				<label class="label-title" for="noHome"> This is your ... Home : </label> <br>
 				<select name="noHome" id="noHome" style="width:20%">
@@ -30,8 +38,19 @@
 					<option value=2> >1 </option>
 				</select>
 				</div>
+				
+				<div class="control-group"> 
+				<label class="label-title" for="typeHome"> Interested property type for purchase: </label> <br>
+				<select name="typeHome" id="typeHome" style="width:20%">
+					<option value="pri"> Private </option>
+					<option value="ec"> Executive Condo </option>
+					<option value="hdb"> HDB </option>
+				</select>
+				</div>
+
 			</div>
 			
+
 			<div class="app-title">
 				<h3> Gross Income </h3>
 			</div>
@@ -63,7 +82,7 @@
 					
 				<div class="control-group">
 					<label class="label-title" for="grossIncome"> Gross Income </label> <br>
-					<span id="grossIncome"> </span>
+					<span id="grossIncome" class="autofill_form"> </span>
 				</div>
 				
 				<!-- For the auto calculate, here is the way to do it -->
@@ -74,9 +93,8 @@
 						var monthly_income = document.getElementById('monthlyIncome')
 						var variable_income = document.getElementById('variableIncome')
 						var gross_income = document.getElementById('grossIncome')
-						gross_income.innerHTML = parseInt(monthly_income.value) + parseInt(variable_income.value)
+						gross_income.innerHTML = parseInt(monthly_income.value) + parseInt(variable_income.value) *0.7/12
 					}
-				
 				</script>
 				
 			</div>	
@@ -89,21 +107,30 @@
 			<div class="homepage-form">
 				<div class="control-group">
 					<label class="label-title" for="cpfFund"> Central Provident Funds (CPF) </label> <br>
-					<input type="number" class="homepage-field" value=0 placeholder="Total Central Provident Funds" name="cpfFund">
+					<input type="number" class="homepage-field" value=0 placeholder="Total Central Provident Funds" name="cpfFund" id="cpfFund" oninput="findAvailableFund()">
 					<label class="homepage-field-icon fui-lock" for="homepage-pass"></label>
 				</div>
 				
 				<div class="control-group">
 					<label class="label-title" for="cash"> Cash </label> <br>
-					<input type="number" class="homepage-field" value=0 placeholder="Total Cash" name="cash">
+					<input type="number" class="homepage-field" value=0 placeholder="Total Cash" name="cash" id="cash" oninput="findAvailableFund()">
 					<label class="homepage-field-icon fui-lock" for="homepage-pass"></label>
 				</div>
 				
-				<!-- <div class="control-group"> -->
-					<!-- <label class="label-title" for="totalFund"> Total Funds </label> <br> -->
-					<!-- <input type="number" class="homepage-field" value=0 placeholder="Total Funds" name="totalFund" disabled> -->
-					<!-- <label class="homepage-field-icon fui-lock" for="homepage-pass"></label> -->
-				<!-- </div> -->
+				<div class="control-group">
+					<label class="label-title" for="totalFund"> Total Available Fund </label> <br>
+					<span id="totalFund" class="autofill_form"> </span>
+				</div>
+				
+				<script type="text/javascript">		
+					function findAvailableFund() {
+						var cpf_fund = document.getElementById('cpfFund')
+						var cash = document.getElementById('cash')
+						var total_fund = document.getElementById('totalFund')
+						total_fund.innerHTML = parseInt(cpf_fund.value) + parseInt(cash.value)
+					}
+				</script>
+				
 			</div>
 			
 			
@@ -114,13 +141,13 @@
 			<div class="homepage-form">
 				<div class="control-group">
 					<label class="label-title" for="creditCard"> Credit Cards </label> <br>
-					<input type="number" class="homepage-field" value=0 placeholder="Sum of minimum payments across all credit cards" name="creditCard">
+					<input type="number" class="homepage-field" value=0 placeholder="Sum of minimum payments across all credit cards" name="creditCard" id="creditCard" oninput="findTotalDebt()">
 					<label class="homepage-field-icon fui-lock" for="homepage-pass"></label>
 				</div>
 				
 				<div class="control-group">
 					<label class="label-title" for="carLoan"> Car Loans </label> <br>
-					<input type="number" class="homepage-field" value=0 placeholder="Car Loan Amount" name="carLoan">
+					<input type="number" class="homepage-field" value=0 placeholder="Car Loan Amount" name="carLoan" id="carLoan" oninput="findTotalDebt()">
 					<label class="homepage-field-icon fui-lock" for="homepage-pass"></label>
 				</div>
 				
@@ -135,25 +162,39 @@
 				
 				<div class="control-group">
 					<label class="label-title" for="homeLoan"> Existing Home Loans </label> <br>
-					<input type="number" class="homepage-field" value=0 placeholder="Do not include existing property if you intend to sell within 6 months" name="homeLoan">
+					<input type="number" class="homepage-field" value=0 placeholder="Do not include existing property if you intend to sell within 6 months" name="homeLoan" id="homeLoan" oninput="findTotalDebt()">
 					<label class="homepage-field-icon fui-lock" for="homepage-pass"></label>
 				</div>
 				
 				<div class="control-group">
 					<label class="label-title" for="otherLoan"> Other Loans </label> <br>
-					<input type="number" class="homepage-field" value=0 placeholder="Others" name="otherLoan">
+					<input type="number" class="homepage-field" value=0 placeholder="Others" name="otherLoan" id="otherLoan" oninput="findTotalDebt()">
 					<label class="homepage-field-icon fui-lock" for="homepage-pass"></label>
 				</div>
 				
-				<!-- <div class="control-group"> -->
-					<!-- <label class="label-title" for="debt"> Debt Obligation </label> <br> -->
-					<!-- <input type="number" class="homepage-field" value=0 placeholder="Debt Obligation" name="debt" disabled> -->
-					<!-- <label class="homepage-field-icon fui-lock" for="homepage-pass"></label> -->
-				<!-- </div> -->
+				
+				<div class="control-group">
+					<label class="label-title" for="totalDebt"> Total Debt Obligation </label> <br>
+					<span id="totalDebt" class="autofill_form"> </span>
+				</div>
+				
+				<script type="text/javascript">		
+					function findTotalDebt() {
+						var credit_card = document.getElementById('creditCard')
+						var car_loan = document.getElementById('carLoan')
+						var home_loan = document.getElementById('homeLoan')
+						var other_loan = document.getElementById('otherLoan')
+						var total_debt = document.getElementById('totalDebt')
+						total_debt.innerHTML = parseInt(credit_card.value) + parseInt(car_loan.value) + parseInt(home_loan.value) + parseInt(other_loan.value)
+					}
+				</script>
+				
+				
+				
 				
 				<div class="control-group"> 
 					<label class="label-title"> Desired Loan Tenure <label> <br>
-					<input type="range" id="loanTenure" min="5" max="35">
+					<input type="range" name="loanTenure" id="loanTenure" min="5" max="35">
 					<br> <span id="loanTenureInput"></span>
 				</div>
 				
@@ -166,6 +207,8 @@
 					}
 					
 				</script>
+				
+				
 				
 			</div>
 			
