@@ -16,13 +16,25 @@ amenities = []
 
 # Using random to instill randomize the number
 for i in range(length):
-	price.append(random.randint(100000,5000000))
-	size.append(random.randint(645, 39000))
-	pricePerSqFt.append(price[i]/size[i])
-	tenure.append(random.randint(*(random.choice([(1,100),(900,949),(1000,1049)]))))
-	location.append((random.uniform(1.26828, 1.46828),random.uniform(104.6444, 104.024719)))
-	property_type.append(random.randint(0,2))
-	amenities.append(random.randint(0,7))
+        property_type.append(random.randint(0,2))
+        #Based on property type, we append the price and square feet accordingly.
+        if property_type[i] == 0: #HDB
+                price.append(random.randint(300000,600000))
+        elif property_type[i] == 1: #Condo
+                price.append(random.randint(1000000,6000000))
+        else: #Private
+        	price.append(random.randint(750000,20000000))
+
+        if property_type[i] == 0: #HDB
+                size.append(random.randint(700, 1200))
+        elif property_type[i] == 1: #Condo
+                size.append(random.randint(500, 2500))
+        else: #Private
+        	size.append(random.randint(1000, 35000))
+        pricePerSqFt.append(price[i]/size[i])
+        tenure.append(random.randint(*(random.choice([(1,100),(900,949),(1000,1049)]))))
+        location.append((random.uniform(1.26828, 1.46828),random.uniform(104.6444, 104.024719)))
+        amenities.append(random.randint(0,7))
 	
 #To map the randomize number with the property type and tenure type
 tenure2 = []
