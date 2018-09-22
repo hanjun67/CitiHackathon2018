@@ -132,7 +132,7 @@ def list_property():
 def tracking():
 	# for tracking
 	# We use a mock database
-	connect_sql = sql.connect('ppt_with_error.db')
+	connect_sql = sql.connect('ppt.db')
 	connect_sql.row_factory = sql.Row
 	
 	cur = connect_sql.cursor()
