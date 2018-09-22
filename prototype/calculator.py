@@ -6,18 +6,17 @@ Created on Fri Sep  7 13:53:35 2018
 """
 
 
-def max_LTV(no_of_loan, desired_tenure, property_type):
+def max_LTV(no_of_loans,desired_tenure,property_type):
     if property_type == 'pri':
         cap = 30
     else:
         cap = 25
-	
-    if no_of_loan == 0:
+    if no_of_loans == 0:
         if desired_tenure < cap:
             return (0.75,0.05)  #(max %, min cash %)
         else:
             return (0.55,0.1)
-    elif no_of_loan == 1:
+    elif no_of_loans == 1:
         if desired_tenure < cap:
             return (0.45,0.25)
         else:
@@ -28,36 +27,33 @@ def max_LTV(no_of_loan, desired_tenure, property_type):
         else:
             return (0.15,0.25)
 
-
-def ABSD(buying_status, no_of_properties):
-    if buying_status == 'F':
-        return 1.2
-    elif buying_status == 'PR':
+def ABSD(status,no_of_properties):
+    if status == 'F':
+        return 0.2
+    elif status == 'PR':
         if no_of_properties == 0:
-            return 1.05
+            return 0.05
         else:
-            return 1.15
+            return 0.15
     else:
         if no_of_properties == 0:
-            return 1
+            return 0
         elif no_of_properties == 1:
-            return 1.12
+            return 0.12
         else:
-            return 1.15
-
+            return 0.15
 
 def BSD(price):
     if price <= 180000:
-        return price * 1.01
+        return price * 0.01
     elif price <= 360000:
-        return 180000 * 1.01 + (price - 180000) * 1.02
+        return 180000 * 0.01 + (price - 180000) * 0.02
     elif price <= 1000000:
-        return 180000 * 1.01 + 180000 * 1.02 + (price - 360000) * 1.03
+        return 180000 * 0.01 + 180000 * 0.02 + (price - 360000) * 0.03
     else:
-        return 180000 * 1.01 + 180000 * 1.02 + 640000 * 1.03 + (price - 1000000) * 1.04
+        return 180000 * 0.01 + 180000 * 0.02 + 640000 * 0.03 + (price - 1000000) * 0.04
 
-
-def max_CPF(age, lease, price, property_type):
+def max_CPF(age,lease,price,property_type):
     if property_type == "pri":
         if lease > 60:
             return price
@@ -71,8 +67,7 @@ def max_CPF(age, lease, price, property_type):
         elif lease > 60:
             return price
 
-
-def tdsr_msr(income, debt, property_type):
+def tdsr_msr(income,debt,property_type):
     if property_type == "pri":
         return income * 0.6 - debt
     else:
@@ -81,7 +76,56 @@ def tdsr_msr(income, debt, property_type):
         else:
             return income * 0.6 - debt
 
+def max_loan_amount(monthly_payment, int_rate, tenure):
+    return round(monthly_payment * ((1 + int_rate / 100 / 12) ** (tenure * 12) - 1) / (int_rate / 100 / 12 * (1 + int_rate / 100 / 12) ** (tenure * 12)))
 
-def max_price(max_ltv, cpf_fund, cash):
-    return ((cpf_fund + cash)/(max_ltv[0] * 100) * 100)
-
+def max_price(cash, cpf, absd, max_ltv, max_loan):
+    def cash_cpf_optimize(cash, cpf, cash_pct, cpf_pct, absd, bsd_pct, bsd_value):
+        return (cash + cpf + bsd_value) / (cash_pct + bsd_pct + absd + cpf_pct)
+    def cash_cpf_loan_optimize(max_loan, cash, cpf, cash_pct, cpf_pct, absd, bsd_pct, bsd_value): #use if cash confirm enough
+        return (max_loan + cash + cpf + bsd_value) / (1 + bsd_pct + absd)
+    cash_pct = max_ltv[1]
+    cpf_pct = 1 - max_ltv[0] - max_ltv[1]
+    max_price = cash / cash_pct
+    max_price_bsd = BSD(max_price)
+    max_price_absd = absd * max_price
+    excess_cpf = cpf - max_price_bsd - max_price_absd
+    if excess_cpf < 0:
+        if max_price > 1000000:
+            max_price = cash_cpf_optimize(cash, cpf, cash_pct, cpf_pct, absd, 0.04, 15400)
+        else:
+            pass
+        if max_price <= 1000000 and max_price > 320000:
+            max_price = cash_cpf_optimize(cash, cpf, cash_pct, cpf_pct, absd, 0.03, 5400)
+        else:
+            pass
+        if max_price <= 320000 and max_price > 180000:
+            max_price = cash_cpf_optimize(cash, cpf, cash_pct, cpf_pct, absd, 0.02, 1800)
+        else:
+            pass
+        if max_price <= 180000:
+            max_price = cash_cpf_optimize(cash, cpf, cash_pct, cpf_pct, absd, 0.01, 0)
+        else:
+            pass
+    else:
+        pass
+    if max_loan + excess_cpf > 0.75 * max_price:
+        return max_price
+    else:
+        if max_price > 1000000:
+            max_price = cash_cpf_loan_optimize(max_loan, cash, cpf, cash_pct, cpf_pct, absd, 0.04, 15400)
+        else:
+            pass
+        if max_price <= 1000000 and max_price > 320000:
+            max_price = cash_cpf_loan_optimize(max_loan, cash, cpf, cash_pct, cpf_pct, absd, 0.03, 5400)
+        else:
+            pass
+        if max_price <= 320000 and max_price > 180000:
+            max_price = cash_cpf_loan_optimize(max_loan, cash, cpf, cash_pct, cpf_pct, absd, 0.02, 1800)
+        else:
+            pass
+        if max_price <= 180000:
+            max_price = cash_cpf_loan_optimize(max_loan, cash, cpf, cash_pct, cpf_pct, absd, 0.01, 0)
+        else:
+            pass
+        return max_price

@@ -21,7 +21,7 @@ type = dataFrame[6].tolist()
 amenities = dataFrame[7].tolist()
 
 # Query to the database
-engine = create_engine('sqlite:///property.db', echo = True)
+engine = create_engine('sqlite:///ppt.db', echo = True)
 
 # create a Session
 Session = sessionmaker(bind=engine)
