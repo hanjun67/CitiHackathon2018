@@ -46,7 +46,7 @@ def property_form():
     
     if request.method == "POST":
 		# Retrieve buyer citizenship
-        buying_buying_status = request.form['buyAs']
+        buying_status = request.form['buyAs']
 		# Retrieve buyer number of home
         no_of_properties = int(request.form['noHome'])
 		# Retrieve buyer type of home
@@ -91,13 +91,18 @@ def property_form():
         int_rate = 3.5
         monthly_income = tdsr_msr(gross_income, debt, property_type)
         ltv = max_LTV(no_of_loan , desired_tenure, property_type)
-        absd_value = ABSD(buying_buying_status, no_of_properties)
+        absd_value = ABSD(buying_status, no_of_properties)
         max_loan = max_loan_amount(monthly_income, int_rate, desired_tenure)
 		
 		# To determine the max property price.
         max_property_price = max_price(cash, cpf_fund, absd_value, ltv, max_loan)
 		
         session['max_property_price'] = max_property_price
+		
+        with sql.connect("ppt.db") as con:
+            curr = con.cursor()
+            curr.execute("insert into user_data (monthly_income,status,debt,property_type,no_of_properties,no_of_loans,affordability) VALUES (?,?,?,?,?,?,?)",(gross_income,buying_status,debt,property_type,no_of_properties,no_of_loan,max_property_price) )
+            con.commit()
 		
         return render_template("property_form.html", max_property_value = max_property_price)
 
@@ -120,12 +125,14 @@ def list_property():
         data_quried = cur.fetchall();
 
 		
-        return render_template("property_list.html", data_quried = data_quried )
+        return render_template("property_list.html", data_quried = data_quried 
+		
 		
 @app.route('/tracking', methods=['POST', 'GET'])
 def tracking():
 	# for tracking
-	connect_sql = sql.connect('ppt.db')
+	# We use a mock database
+	connect_sql = sql.connect('ppt_with_error.db')
 	connect_sql.row_factory = sql.Row
 	
 	cur = connect_sql.cursor()
