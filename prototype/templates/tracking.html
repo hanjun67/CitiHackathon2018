@@ -4,11 +4,11 @@
 	<link rel="stylesheet" href="static\style.css" type="text/css">
 </head>
 
-<form action="/property_list" method="POST">
+<form action="/tracking" method="POST">
 	<div class="homepage">
 		<div class="homepage-screen">
 			<div class="app-title">
-				<h1> List of Property </h1>
+				<h1> Tracking Records </h1>
 			</div>
 			
 			<div class="homepage-form">
@@ -20,23 +20,23 @@
 				<div class="control-group">
 					<table id="featuredList" align="center">
 							<tr>
-								<th onclick="sortTable(0,'featuredList')"> Location </th>
-								<th onclick="sortTable(1,'featuredList')"> Price </th>
-								<th onclick="sortTable(2,'featuredList')"> Size </th>
-								<th onclick="sortTable(3,'featuredList')"> Price Per Sqft</th>
-								<th onclick="sortTable(4,'featuredList')"> Tenure </th>
-								<th onclick="sortTable(5,'featuredList')"> Type </th>
-								<th onclick="sortTable(6,'featuredList')"> Amenities </th>
+								<th onclick="sortTable(0,'featuredList')"> Platform </th>
+								<th onclick="sortTable(1,'featuredList')"> Browser </th>
+								<th onclick="sortTable(2,'featuredList')"> Status </th>
+								<th onclick="sortTable(3,'featuredList')"> IP Address </th>
+								<th onclick="sortTable(4,'featuredList')"> Path </th>
+								<th onclick="sortTable(5,'featuredList')"> Speed </th>
+								<th onclick="sortTable(6,'featuredList')"> Date and Time </th>
 							</tr>
 							{% for element in data_quried %}
 							<tr>
-							   <td> {{ element['location'] }} </td>
-							   <td> {{ element['price'] }} </td>
-							   <td> {{ element['size'] }} </td>
-							   <td> {{ element['pricePerSqFt'] }} </td>
-							   <td> {{ element['tenure'] }} </td>
-							   <td> {{ element['type'] }} </td>
-							   <td> {{ element['amenities'] }} </td>
+							   <td> {{ element['ua_browser'] }} </td>
+							   <td> {{ element['ua_platform'] }} </td>
+							   <td> {{ element['status'] }} </td>
+							   <td> {{ element['remote_addr'] }} </td>
+							   <td> {{ element['path'] }} </td>
+							   <td> {{ element['speed'] }} </td>
+							   <td> {{ element['datetime'] }} </td>
 							</tr>
 							{% endfor %}
 					  </table>
@@ -44,38 +44,6 @@
 				
 				
 				
-				<!-- <div class="app-title"> -->
-					<!-- <h3> Others </h3> -->
-				<!-- </div> -->
-				
-				<!-- <div class="control-group"> -->
-					<!-- <table id="otherList" align="center"> -->
-							<!-- <tr> -->
-								<!-- <th onclick="sortTable(0,'otherList')"> Location </th> -->
-								<!-- <th onclick="sortTable(1,'otherList')"> Price </th> -->
-								<!-- <th onclick="sortTable(2,'otherList')"> Size </th> -->
-								<!-- <th onclick="sortTable(3,'otherList')"> Price Per Sqft</th> -->
-								<!-- <th onclick="sortTable(4,'otherList')"> Tenure </th> -->
-								<!-- <th onclick="sortTable(5,'otherList')"> Type </th> -->
-								<!-- <th onclick="sortTable(6,'otherList')"> Amenities </th> -->
-							<!-- </tr> -->
-							<!-- <tr> -->
-							   <!-- <td> {{ grossIncome }} </td> -->
-							   <!-- <td> {{ totalFund }} </td> -->
-							   <!-- <td> {{ debt }} </td> -->
-							   <!-- <td> {{ noHome }} </td> -->
-							   <!-- <td> {{ buyAs }} </td> -->
-							   <!-- <td> {{ buyAs }} </td> -->
-							   <!-- <td> </td> -->
-							<!-- </tr> -->
-
-					  <!-- </table> -->
-				<!-- </div> -->
-				
-				
-				
-			<!-- </div>	 -->
-			
 			
 			<script>
 				// This function is from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_sort_table_desc
